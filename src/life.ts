@@ -3,6 +3,10 @@ export enum Status {
   Alive,
 }
 
+export function initializeMap(width: number, height: number) {
+  return new Array(height).fill([]).map(() => new Array(width).fill(Status.Dead));
+}
+
 export function render(context: CanvasRenderingContext2D, map: Status[][]) {
   const size = Math.round(window.innerHeight / map.length);
   for (let i = 0; i < map.length; i++) {

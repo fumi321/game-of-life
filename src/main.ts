@@ -1,4 +1,4 @@
-import { render, Status, randomizeMap, computeNextGeneration } from "./life.ts";
+import { render, randomizeMap, computeNextGeneration, initializeMap } from "./life.ts";
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -6,7 +6,7 @@ canvas.height = window.innerHeight;
 const context = canvas.getContext("2d")!;
 
 const size = 64;
-let map: Status[][] = new Array(size).fill([]).map(() => new Array(size).fill(Status.Dead));
+let map = initializeMap(size, size);
 
 randomizeMap(map);
 
