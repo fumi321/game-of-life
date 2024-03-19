@@ -28,3 +28,24 @@ export function randomizeMap(map: Status[][]) {
     }
   }
 }
+
+function doesCollideWalls(map: any[][], x: number, y: number): boolean {
+  if (x < 0 || x > map.length || y < 0 || y > map[0].length) return true;
+  return false;
+}
+
+function countNeighbors(map: Status[][], x: number, y: number): number {
+  let count = 0;
+  for (let i = y - 1; i <= y + 1; i++) {
+    for (let j = x - 1; j <= x + 1; j++) {
+      if (doesCollideWalls(map, x, y)) continue;
+      if (map[i][j] == Status.Alive) {
+        count++;
+      }
+    }
+  }
+  if (map[y][x] == Status.Alive) {
+    count--;
+  }
+  return count;
+}
