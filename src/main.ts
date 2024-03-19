@@ -7,8 +7,7 @@ const context = canvas.getContext("2d")!;
 
 const size = 64;
 let map = initializeMap(size, size);
-
-randomizeMap(map);
+map = randomizeMap(map);
 
 setInterval(() => {
   render(context, map);

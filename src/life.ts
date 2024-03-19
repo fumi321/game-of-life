@@ -7,21 +7,6 @@ export function initializeMap(width: number, height: number) {
   return new Array(height).fill([]).map(() => new Array(width).fill(Status.Dead));
 }
 
-export function render(context: CanvasRenderingContext2D, map: Status[][]) {
-  const size = Math.round(window.innerHeight / map.length);
-  for (let i = 0; i < map.length; i++) {
-    for (let j = 0; j < map[i].length; j++) {
-      if (map[i][j] == Status.Alive) {
-        context.fillStyle = "green";
-        context.fillRect(i * size, j * size, size, size);
-      } else if (map[i][j] == Status.Dead) {
-        context.fillStyle = "white";
-        context.fillRect(i * size, j * size, size, size);
-      }
-    }
-  }
-}
-
 export function randomizeMap(map: Status[][]) {
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
@@ -33,6 +18,22 @@ export function randomizeMap(map: Status[][]) {
         }
       };
       map[i][j] = status();
+    }
+  }
+  return map;
+}
+
+export function render(context: CanvasRenderingContext2D, map: Status[][]) {
+  const size = Math.round(window.innerHeight / map.length);
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      if (map[i][j] == Status.Alive) {
+        context.fillStyle = "green";
+        context.fillRect(i * size, j * size, size, size);
+      } else if (map[i][j] == Status.Dead) {
+        context.fillStyle = "white";
+        context.fillRect(i * size, j * size, size, size);
+      }
     }
   }
 }
