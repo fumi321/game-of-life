@@ -6,17 +6,15 @@ canvas.height = window.innerHeight;
 const context = canvas.getContext("2d")!;
 
 const size = 64;
-let map: Status[][] = new Array(size)
-  .fill(Status.Alive)
-  .map(() => new Array(size).fill(Status.Dead));
+let map: Status[][] = new Array(size).fill([]).map(() => new Array(size).fill(Status.Dead));
 
-randomizeMap(map);
-
-render(context, map);
+map[30][30] = Status.Alive;
+map[30][31] = Status.Alive;
+map[30][32] = Status.Alive;
+map[31][32] = Status.Alive;
+map[32][31] = Status.Alive;
 
 setInterval(() => {
-  map = computeNextGeneration(map);
   render(context, map);
+  map = computeNextGeneration(map);
 }, 1000);
-
-console.table(map);
