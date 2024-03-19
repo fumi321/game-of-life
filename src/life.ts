@@ -1,15 +1,9 @@
-enum Status {
+export enum Status {
   Dead,
   Alive,
 }
 
-const size = 64;
-
-export let map: Status[][] = new Array(size)
-  .fill(Status.Alive)
-  .map(() => new Array(size).fill(Status.Dead));
-
-export function render(context: CanvasRenderingContext2D) {
+export function render(context: CanvasRenderingContext2D, map: Status[][]) {
   const size = window.innerHeight / map.length;
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
@@ -24,13 +18,20 @@ export function render(context: CanvasRenderingContext2D) {
 export function randomizeMap(map: Status[][]) {
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
-      map[i][j] = Math.round(Math.random());
+      let status = (): Status => {
+        if (Math.round(Math.random()) == 1) {
+          return Status.Alive;
+        } else {
+          return Status.Dead;
+        }
+      };
+      map[i][j] = status();
     }
   }
 }
 
 function doesCollideWalls(map: any[][], x: number, y: number): boolean {
-  if (x < 0 || x > map.length || y < 0 || y > map[0].length) return true;
+  if (x < 0 || x >= map.length || y < 0 || y >= map[0].length) return true;
   return false;
 }
 
@@ -38,7 +39,9 @@ function countNeighbors(map: Status[][], x: number, y: number): number {
   let count = 0;
   for (let i = y - 1; i <= y + 1; i++) {
     for (let j = x - 1; j <= x + 1; j++) {
-      if (doesCollideWalls(map, x, y)) continue;
+      if (doesCollideWalls(map, i, j)) {
+        continue;
+      }
       if (map[i][j] == Status.Alive) {
         count++;
       }
