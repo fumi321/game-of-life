@@ -17,4 +17,4 @@ map[32][31] = Status.Alive;
 setInterval(() => {
   render(context, map);
   map = computeNextGeneration(map);
-}, 1000);
+}, 100);
