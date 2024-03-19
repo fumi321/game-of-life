@@ -9,8 +9,10 @@ export function render(context: CanvasRenderingContext2D, map: Status[][]) {
     for (let j = 0; j < map[i].length; j++) {
       if (map[i][j] == Status.Alive) {
         context.fillStyle = "green";
-        context.fillRect(i * size, j * size, size, size);
+      } else {
+        context.fillStyle = "white";
       }
+      context.fillRect(i * size, j * size, size, size);
     }
   }
 }
