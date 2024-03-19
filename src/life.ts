@@ -57,14 +57,7 @@ function countNeighbors(map: Status[][], x: number, y: number): number {
 }
 
 export function computeNextGeneration(map: Status[][]) {
-  let next: Status[][] = new Array(map.length)
-    .fill([])
-    .map(() => new Array(map[0].length).fill(Status.Dead));
-  for (let i = 0; i < map.length; i++) {
-    for (let j = 0; j < map[i].length; j++) {
-      next[i][j] = map[i][j];
-    }
-  }
+  let next: Status[][] = structuredClone(map);
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
       const alive = countNeighbors(map, j, i);
