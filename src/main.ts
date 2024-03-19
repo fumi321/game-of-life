@@ -1,4 +1,5 @@
-import { render, randomizeMap, computeNextGeneration, initializeMap } from "./life.ts";
+import { initializeMap, randomizeMap, render, computeNextGeneration } from "./life.ts";
+
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
