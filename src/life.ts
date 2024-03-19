@@ -4,7 +4,7 @@ export enum Status {
 }
 
 export function render(context: CanvasRenderingContext2D, map: Status[][]) {
-  const size = window.innerHeight / map.length;
+  const size = Math.round(window.innerHeight / map.length);
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
       if (map[i][j] == Status.Alive) {
