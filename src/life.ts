@@ -49,3 +49,25 @@ function countNeighbors(map: Status[][], x: number, y: number): number {
   }
   return count;
 }
+
+export function computeNextGeneration(map: Status[][]) {
+  let next = [...map];
+  for (let i = 0; i < next.length; i++) {
+    for (let j = 0; j < next[i].length; j++) {
+      if (next[i][j] == Status.Alive) {
+        if (countNeighbors(next, i, j) == 2 || countNeighbors(next, i, j) == 3) {
+          next[i][j] = Status.Alive;
+        } else {
+          next[i][j] = Status.Dead;
+        }
+      } else {
+        if (countNeighbors(next, i, j) == 3) {
+          next[i][j] = Status.Alive;
+        } else {
+          next[i][j] = Status.Dead;
+        }
+      }
+    }
+  }
+  return next;
+}
