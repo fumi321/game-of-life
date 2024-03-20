@@ -3,11 +3,11 @@ enum Status {
   Alive,
 }
 
-export function initializeMap(width: number, height: number) {
+export function initializeMap(width: number, height: number): Status[][] {
   return new Array(height).fill([]).map(() => new Array(width).fill(Status.Dead));
 }
 
-export function randomizeMap(map: Status[][]) {
+export function randomizeMap(map: Status[][]): Status[][] {
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
       let status = (): Status => {
@@ -60,7 +60,7 @@ function countNeighbors(map: Status[][], x: number, y: number): number {
   return count;
 }
 
-export function computeNextGeneration(map: Status[][]) {
+export function computeNextGeneration(map: Status[][]): Status[][] {
   let next: Status[][] = structuredClone(map);
   for (let i = 0; i < map.length; i++) {
     for (let j = 0; j < map[i].length; j++) {
