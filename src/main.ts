@@ -10,7 +10,13 @@ const size = 64;
 let map = initializeMap(size, size);
 map = randomizeMap(map);
 
-setInterval(() => {
-  render(context, map);
-  map = computeNextGeneration(map);
-}, 100);
+const timeMs = 100;
+function update() {
+  setTimeout(() => {
+    render(context, map);
+    map = computeNextGeneration(map);
+    requestAnimationFrame(update);
+  }, timeMs);
+}
+
+update();
